@@ -36,3 +36,7 @@ Explanation:
 FUZZ is replaced by each word in the list
 
 -fs 0 filters size 0 responses
+```
+ffuf -u http://TARGET_IP/ -w /usr/share/wordlists/seclists/Discovery/DNS/namelist.txt -H "Host: FUZZ.example.com" -fs 0
+```
+
