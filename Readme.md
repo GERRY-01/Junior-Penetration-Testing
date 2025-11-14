@@ -18,3 +18,21 @@ or
 ```
 dnsrecon -t brt -d example.com
 ```
+### Using Sublist3r for Sudomain Enumeration
+Sublist3r is a Python tool used to enumerate subdomains using OSINT. 
+```
+sublist3r -d acmeitsupport.thm
+```
+### Subdomain enumeration using Virtual host
+A virtual host is when a single server (same IP address) hosts multiple websites or subdomains.
+we use this tool ffuf
+```
+ffuf -w wordlist.txt -u http://TARGET_IP/ -H "Host: FUZZ.example.com" -fs 0
+```
+Explanation:
+
+-H modifies the Host header
+
+FUZZ is replaced by each word in the list
+
+-fs 0 filters size 0 responses
