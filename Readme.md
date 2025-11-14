@@ -4,3 +4,17 @@ You open your terminal and run the command **dirb folowed by the url of the webs
 ```
 dirb http://fakebank.thm
 ```
+
+# Subdomain Enumeration
+It is the process of discovering valid subdomains of a domain.
+**Passive Subdomain enumeration** - Does NOT interact directly with the target.It gathers data from public sources.
+**Avtive Subdomain enumeration** - Directly interacts with the target
+
+### Using Dnsrecon for Subdomain Enumeration
+```
+dnsrecon -d example.com -D wordlist.txt -t brt
+```
+or
+```
+dnsrecon -t brt -d example.com
+```
