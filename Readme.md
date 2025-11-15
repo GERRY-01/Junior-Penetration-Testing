@@ -39,4 +39,16 @@ FUZZ is replaced by each word in the list
 ```
 ffuf -u http://TARGET_IP/ -w /usr/share/wordlists/seclists/Discovery/DNS/namelist.txt -H "Host: FUZZ.example.com" -fs 0
 ```
+# Passive Recon
+### whois commad
+Used to query WHOIS servers for example registrar of a website, contact information,name server etc
+```
+whois tryhackme.com
+```
+### nslookup and dig
+Purpose: To find the IP address and other DNS records of a domain name. You can use commands
+```nslooup domain   or   nslookup -type=A domain
+you can use type=A for ipv4 addresses, type=AAAA for ipv6 addresses, type=MX for mail exchanger, type=CNAME for canonical names etc
+```
+
 
