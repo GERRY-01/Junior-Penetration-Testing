@@ -52,6 +52,12 @@ nslooup domain   or   nslookup -type=A domain
 ```
 you can use type=A for ipv4 addresses, type=AAAA for ipv6 addresses, type=MX for mail exchanger, type=CNAME for canonical names etc
 
+for more advanced dns records you can use **dig** ie
+```
+dig DOMAIN_NAME TYPE (dig example.com MX)
+```
+
+
 
 
 
