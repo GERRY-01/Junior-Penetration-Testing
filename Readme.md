@@ -55,7 +55,16 @@ you can use type=A for ipv4 addresses, type=AAAA for ipv6 addresses, type=MX for
 for more advanced dns records you can use **dig** ie
 ```
 dig DOMAIN_NAME TYPE (dig example.com MX)
+dig example.com @8.8.8.8
 ```
+### DNSDumpster
+reconnaissance tool that discovers hidden subdomains and maps out a target's DNS infrastructure quickly and efficiently.
+You can find it here https://dnsdumpster.com/
+
+### Shodan.io
+It allows you to gather detailed information about a target's network without actively connecting to it yourself.
+
+
 
 
 
