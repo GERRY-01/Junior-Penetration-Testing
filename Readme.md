@@ -48,7 +48,9 @@ whois tryhackme.com
 ### nslookup and dig
 Purpose: To find the IP address and other DNS records of a domain name. You can use commands
 ```nslooup domain   or   nslookup -type=A domain
-you can use type=A for ipv4 addresses, type=AAAA for ipv6 addresses, type=MX for mail exchanger, type=CNAME for canonical names etc
 ```
+you can use type=A for ipv4 addresses, type=AAAA for ipv6 addresses, type=MX for mail exchanger, type=CNAME for canonical names etc
+
+
 
 
