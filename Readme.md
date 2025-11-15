@@ -23,6 +23,12 @@ Sublist3r is a Python tool used to enumerate subdomains using OSINT.
 ```
 sublist3r -d acmeitsupport.thm
 ```
+### Using OSINT
+using gooogle search engine. For example if I want to get the subdomains of www.tryhackme.com I'll just search
+```
+-site:www.tryhackme.com site:*.tryhackme.com
+```
+
 ### Subdomain enumeration using Virtual host
 A virtual host is when a single server (same IP address) hosts multiple websites or subdomains.
 we use this tool ffuf
@@ -63,6 +69,7 @@ You can find it here https://dnsdumpster.com/
 
 ### Shodan.io
 It allows you to gather detailed information about a target's network without actively connecting to it yourself.
+
 
 
 
