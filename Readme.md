@@ -1,11 +1,11 @@
-# Finding Hidden urls in a website
+# 1. Finding Hidden urls in a website
 To find hidden URLs, we will use a tool called **dirb**. This tool uses a brute-force approach, by taking a list of potential page names and testing one by one if they exist in your website. This approach works because people use predictable names a lot of times.
 You open your terminal and run the command **dirb folowed by the url of the website**
 ```
 dirb http://fakebank.thm
 ```
 
-# Subdomain Enumeration
+# 2. Subdomain Enumeration
 It is the process of discovering valid subdomains of a domain.
 **Passive Subdomain enumeration** - Does NOT interact directly with the target.It gathers data from public sources.
 **Avtive Subdomain enumeration** - Directly interacts with the target
@@ -69,6 +69,20 @@ You can find it here https://dnsdumpster.com/
 
 ### Shodan.io
 It allows you to gather detailed information about a target's network without actively connecting to it yourself.
+
+# 3. Authentication bypass
+### username enumeration
+This can be done in a signup page to check the usernames that already exist
+you run the command 
+```
+ffuf -w /usr/share/wordlists/Seclists/Usernames/Names/names.txt \
+     -X POST \
+     -d "username=FUZZ&email=x&password=x&cpassword=x" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -u URL \
+     -mr "username already exists"
+```
+
 
 
 
