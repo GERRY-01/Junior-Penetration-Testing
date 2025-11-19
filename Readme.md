@@ -94,8 +94,32 @@ fuff -w valid_usernames.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Cr
 ```
 by doing this you ca find a match
 
+### Logic flow
+A good example is this. Let's say you have a site that does this when you want to reset your password
+Your site:
 
+Takes an email address.
 
+Checks if it exists in the database.
+
+If it exists → shows a message like:
+“We’ll send a reset email to user@example.com
+.”
+
+If it does not exist → shows a different message (or no redirect).
+
+An attacker can curl your password reset endpoint like this:
+```
+curl -X POST https://example.com/reset -d "email=victim@example.com"
+```
+by doing this he will check if the email exists or not
+
+If the email exists, he can try to send the reqest password of your email and the response will be sent to his email. Using this command
+```
+curl url/reset?email=robert@gmail.com -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=robert&email=attacker.gmail.com'
+```
+
+**This onlyworks on badly coded websites**
 
 
 
