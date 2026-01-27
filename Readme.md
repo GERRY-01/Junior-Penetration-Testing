@@ -49,9 +49,56 @@ dig @8.8.8.8 example.com              # Use specific DNS server
 dig +noall +answer example.com ANY     # Clean output format
 ```
 
+**DNS Zone Transfer Attempts:**
 
+Zone transfers can reveal complete DNS zone information, including internal hostnames and infrastructure details:
 
+```
+# Identify name servers
+dig example.com NS
 
+# Attempt zone transfer from each name server
+dig @ns1.example.com example.com AXFR
+dig @ns2.example.com example.com AXFR
+
+# Alternative zone transfer syntax
+dig AXFR example.com @ns1.example.com
+```
+
+**DNS Enumeration with nslookup**
+The nslookup command provides alternative DNS enumeration capabilities with different output formats:
+```
+# Interactive mode
+nslookup
+> set type=MX
+> example.com
+> set type=TXT
+> example.com
+> exit
+
+# Command-line mode
+nslookup -type=A example.com
+nslookup -type=MX example.com
+nslookup -type=TXT example.com
+nslookup -type=NS example.com
+
+# Reverse DNS lookups
+nslookup 192.168.1.1
+nslookup -type=PTR 1.1.168.192.in-addr.arpa
+```
+**Advanced nslookup Techniques:**
+```
+# Using specific DNS servers
+nslookup example.com 8.8.8.8
+nslookup -type=MX example.com 1.1.1.1
+
+# Zone transfer attempts
+nslookup -type=AXFR example.com ns1.example.com
+
+# Detailed DNS server information
+nslookup -debug example.com
+```
+#### Subdomain Enumeration: Expanding the Attack Surface
 
 
 
