@@ -229,11 +229,12 @@ Queries an online IP information service
 
 Filters the page to show only:
 
-Organization,
+Organization
 
-ISP/n,
+ISP
 
 Country
+
 
 
 
