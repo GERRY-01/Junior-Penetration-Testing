@@ -101,9 +101,9 @@ nslookup -debug example.com
 #### Subdomain Enumeration: Expanding the Attack Surface
 **Passive Subdomain discovery :** You do not touch the target’s servers directly. You only use public data
 
-**............Certificate Transparency Analysis................**
-Just go to this link **https://crt.sh** to discover subdomains
-**............Using curl (automation).........................**
+**(a) Certificate Transparency Analysis**
+Just go to this link **https://crt.sh** to discover subdomains/n
+**(b) Using curl (automation)**
 ```
 curl -s "https://crt.sh/?q=example.com&output=json” | jq -r ‘.[].namevalue’ | sort -u curl -s “https://crt.sh/?q=%.example.com&output=json” | jq -r ‘.[].namevalue’ | sort -u
 
@@ -116,7 +116,7 @@ Extracts subdomain names
 
 Removes duplicates
 
-**...............Historical certificate analysis.............**
+**(c) Historical certificate analysis**
 ```
 curl -s “https://crt.sh/?q=example.com&output=json” | jq -r ‘.[] | “(.notbefore) (.namevalue)”’ | sort “`
 ```
@@ -126,7 +126,7 @@ When a subdomain first appeared
 
 Old / deprecated systems
 
-**..................Subfinder: Comprehensive Passive Discovery..........**
+**(d) Subfinder: Comprehensive Passive Discovery**
 
 Subfinder aggregates subdomain information from multiple passive sources:
 
@@ -146,7 +146,7 @@ subfinder -dL domains.txt -o all_subdomains.txt
 # Use specific sources (might need API keys)
 subfinder -d example.com -sources censys,virustotal,shodan
 ```
-**.................Amass: Advanced Asset Discovery...........**
+**(e) Amass: Advanced Asset Discovery**
 Amass provides comprehensive asset discovery combining passive and active techniques:
 
 ```
@@ -164,11 +164,76 @@ amass enum -d example.com -o amass_results.txt -v
 
 # Multiple domains with configuration
 amass enum -df domains.txt -config config.ini
-``
+```
+#### Active Subdomain Discovery
+Active subdomain enumeration directly queries DNS servers and may use brute force techniques to discover subdomains.
 
+**Assetfinder: Lightweight Discovery**
+Assetfinder provides fast subdomain discovery with minimal dependencies:
 
+```
+# Basic assetfinder usage
+assetfinder example.com
 
+# Include subdomains of subdomains
+assetfinder --subs-only example.com
 
+# Combine with other tools
+assetfinder example.com | sort -u > assetfinder_results.txt
+```
+
+#### Infrastructure Footprinting: Connecting the Dots
+Infrastructure footprinting involves analyzing discovered assets to understand their relationships, hosting patterns, and network architecture.
+**IP Address Analysis and Network Mapping**
+**IP to Domain Resolution:**
+```
+# Reverse DNS lookups
+dig -x 192.168.1.1
+nslookup 192.168.1.1
+
+# Batch reverse DNS using a script
+for ip in $(seq 1 254); do
+    dig -x 192.168.1.$ip +short | grep -v "^$"
+done
+```
+**Network Range Discovery:**
+```
+# WHOIS network information
+whois 192.168.1.1 | grep -E "(NetRange|CIDR|inetnum)"
+
+# Network range enumeration
+whois -h whois.arin.net 192.168.1.1
+whois -h whois.ripe.net 192.168.1.1
+whois -h whois.apnic.net 192.168.1.1
+```
+**IPv4 Lookup Tools:**
+After you get an IP address, you should look it up to understand who owns it and where it is.
+
+An IP by itself (like 192.168.1.1) doesn’t tell you much.
+IPv4 lookup tools add context.
+```
+# Using online IPv4 lookup services
+curl -s "https://ipv4info.com/ip-address/192.168.1.1" | grep -E "(Organization|ISP|Country)"
+```
+Step by step:
+
+1️⃣ curl -s
+
+Fetches a web page silently (no progress output)
+
+2️⃣ https://ipv4info.com/ip-address/192.168.1.1
+
+Queries an online IP information service
+
+3️⃣ grep -E "(Organization|ISP|Country)"
+
+Filters the page to show only:
+
+Organization,
+
+ISP/n,
+
+Country
 
 
 
