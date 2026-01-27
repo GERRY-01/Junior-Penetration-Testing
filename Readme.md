@@ -99,6 +99,77 @@ nslookup -type=AXFR example.com ns1.example.com
 nslookup -debug example.com
 ```
 #### Subdomain Enumeration: Expanding the Attack Surface
+**Passive Subdomain discovery :** You do not touch the target’s servers directly. You only use public data
+
+**............Certificate Transparency Analysis................**
+Just go to this link **https://crt.sh** to discover subdomains
+**............Using curl (automation).........................**
+```
+curl -s "https://crt.sh/?q=example.com&output=json” | jq -r ‘.[].namevalue’ | sort -u curl -s “https://crt.sh/?q=%.example.com&output=json” | jq -r ‘.[].namevalue’ | sort -u
+
+```
+This:
+
+Downloads certificate data
+
+Extracts subdomain names
+
+Removes duplicates
+
+**...............Historical certificate analysis.............**
+```
+curl -s “https://crt.sh/?q=example.com&output=json” | jq -r ‘.[] | “(.notbefore) (.namevalue)”’ | sort “`
+```
+This tells you:
+
+When a subdomain first appeared
+
+Old / deprecated systems
+
+**..................Subfinder: Comprehensive Passive Discovery..........**
+
+Subfinder aggregates subdomain information from multiple passive sources:
+
+```
+# Basic subfinder usage
+subfinder -d example.com
+
+# Multiple sources and detailed output
+subfinder -d example.com -all -v
+
+# Output to file for analysis
+subfinder -d example.com -o subdomains.txt
+
+# Multiple domains using a domain input list
+subfinder -dL domains.txt -o all_subdomains.txt
+
+# Use specific sources (might need API keys)
+subfinder -d example.com -sources censys,virustotal,shodan
+```
+**.................Amass: Advanced Asset Discovery...........**
+Amass provides comprehensive asset discovery combining passive and active techniques:
+
+```
+# Passive enumeration
+amass enum -passive -d example.com
+
+# Active enumeration (more thorough)
+amass enum -active -d example.com
+
+# Brute force discovery
+amass enum -brute -d example.com
+
+# Output with detailed information
+amass enum -d example.com -o amass_results.txt -v
+
+# Multiple domains with configuration
+amass enum -df domains.txt -config config.ini
+``
+
+
+
+
+
 
 
 
