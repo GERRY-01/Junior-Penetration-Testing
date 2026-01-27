@@ -235,6 +235,13 @@ ISP
 
 Country
 
+**Shodan**
+Shodan discovers hosts, services, and infrastructure information.
+
+```
+shodan domain example.com   or  shodan host ip address
+```
+
 
 
 
